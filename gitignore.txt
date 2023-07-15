@@ -24,23 +24,22 @@ yarn-error.log*
 
 # Backend
 # Byte-compiled / optimized / DLL files
-lobes_back_end/*__pycache__/
+*__pycache__/
 
 # Environments
-lobes_back_end/.env
-lobes_back_end/.venv
-lobes_back_end/env/
-lobes_back_end/venv/
-lobes_back_end/ENV/
-lobes_back_end/env.bak/
-lobes_back_end/venv.bak/
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 # Constants
-lobes_back_end/*constants.py 
+
 *constants.py 
 
 # Ignore for Pycarm
-lobes_back_end/*.idea/
 *.idea/
 
 
