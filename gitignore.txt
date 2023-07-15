@@ -22,5 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/lobes_back_end/lobes_env/*
+/lobes_back_end/lobes_env/
 
