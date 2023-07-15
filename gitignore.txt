@@ -27,13 +27,13 @@ yarn-error.log*
 *__pycache__/
 
 # Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+*.env
+*.venv
+*env/
+*venv/
+*ENV/
+*env.bak/
+*venv.bak/
 
 # Constants
 
@@ -41,5 +41,3 @@ venv.bak/
 
 # Ignore for Pycarm
 *.idea/
-
-
