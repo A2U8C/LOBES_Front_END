@@ -21,3 +21,28 @@ lobes_front_end/.pnp.js
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Backend
+# Byte-compiled / optimized / DLL files
+*__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+lobes_back_end/.env
+lobes_back_end/.venv
+lobes_back_end/env/
+lobes_back_end/venv/
+lobes_back_end/ENV/
+lobes_back_end/env.bak/
+lobes_back_end/venv.bak/
+
+# Constants
+lobes_back_end/constants.py 
+*constants.py 
+
+# Ignore for Pycarm
+lobes_back_end/*.idea/
+*.idea/
+
+
