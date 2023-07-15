@@ -24,9 +24,9 @@ yarn-error.log*
 
 # Backend
 # Byte-compiled / optimized / DLL files
-*__pycache__/
-*.py[cod]
-*$py.class
+lobes_back_end/*__pycache__/
+lobes_back_end/*.py[cod]
+lobes_back_end/*$py.class
 
 # Environments
 lobes_back_end/.env
