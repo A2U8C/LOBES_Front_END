@@ -38,7 +38,7 @@ lobes_back_end/env.bak/
 lobes_back_end/venv.bak/
 
 # Constants
-lobes_back_end/constants.py 
+lobes_back_end/*constants.py 
 *constants.py 
 
 # Ignore for Pycarm
