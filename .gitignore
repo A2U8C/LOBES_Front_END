@@ -1,9 +1,29 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Byte-compiled / optimized / DLL files
+*__pycache__/
+*.py[cod]
+*$py.class
+
 
 # dependencies
 lobes_front_end/node_modules/
 lobes_front_end/.pnp
 lobes_front_end/.pnp.js
+lobes_back_end/lobes_env/*
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Constants
+*constants.py 
+
+# Ignore for Pycarm
+*.idea/
 
 # testing
 /coverage
@@ -21,6 +41,3 @@ lobes_front_end/.pnp.js
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-/lobes_back_end/lobes_env/
-
