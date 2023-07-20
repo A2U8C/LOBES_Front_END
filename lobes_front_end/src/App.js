@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { ColorContextMode, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import CustomSideBar from "./Scenes/Global/CustomSideBar";
+import Topbar from "./Scenes/Global/Topbar";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -15,7 +16,7 @@ function App() {
         <div className="app">
           <CustomSideBar />
           <main className="content">
-            {/* <Topbar /> */}
+            <Topbar />
             <Routes>
               <Route path="/" element={<p>Home</p>} />
               <Route path="/cohorts" element={<p>cohorts</p>} />
