@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Sidebar, Menu, MenuItem, menuClasses } from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 
 import Logo from "../../Assets/Logo.svg";
@@ -36,7 +36,7 @@ function CustomSideBar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const colors = tokens(theme.palette.mode);
 
-  // Responsive Side Bar behaviour
+  // // Responsive Side Bar behaviour
   const [width, setWidth] = useState();
   function getSize() {
     setWidth(window.innerWidth);
@@ -53,7 +53,7 @@ function CustomSideBar() {
     return () => {
       window.removeEventListener("resize", getSize);
     };
-  }, [window.innerWidth]);
+  }, [width]);
 
   return (
     <Box>
@@ -75,7 +75,8 @@ function CustomSideBar() {
                     ? colors.yellowAccent[500]
                     : undefined,
                   borderRadius: "0 50px 50px 0",
-                  marginRight: "20px",
+                  margin: "10px 20px 10px 0",
+
                   "&:hover": {
                     backgroundColor: colors.blues[100],
                     color: colors.grey[700],

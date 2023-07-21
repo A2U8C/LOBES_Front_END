@@ -6,6 +6,7 @@ import { ColorContextMode, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import CustomSideBar from "./Scenes/Global/CustomSideBar";
 import Topbar from "./Scenes/Global/Topbar";
+import Cohorts from "./Scenes/Cohorts";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -19,7 +20,7 @@ function App() {
             <Topbar />
             <Routes>
               <Route path="/" element={<p>Home</p>} />
-              <Route path="/cohorts" element={<p>cohorts</p>} />
+              <Route path="/cohorts" element={<Cohorts />} />
             </Routes>
           </main>
         </div>
