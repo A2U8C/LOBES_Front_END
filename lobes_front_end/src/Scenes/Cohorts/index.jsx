@@ -44,6 +44,31 @@ const mockData = [
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
   },
+  {
+    name: "Cohort 9",
+    description:
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
+  },
+  {
+    name: "Cohort 10",
+    description:
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
+  },
+  {
+    name: "Cohort 11",
+    description:
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
+  },
+  {
+    name: "Cohort 12",
+    description:
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
+  },
+  {
+    name: "Cohort 13",
+    description:
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
+  },
 ];
 
 const headCells = [
@@ -71,6 +96,7 @@ function Cohorts() {
     const getData = async () => {
       const result = await getCohortData();
       setData(result);
+      return result;
     };
 
     getData();
