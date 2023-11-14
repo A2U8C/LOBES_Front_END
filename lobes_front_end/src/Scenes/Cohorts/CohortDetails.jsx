@@ -1,67 +1,47 @@
-import React from "react";
 import Header from "../../components/Header";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import BasicTabs from "../../components/BasicTabs";
+import PersonCard from "../../components/PersonCard";
+import InfoCard from "../../components/InfoCard";
+import ProjectAccordians from "../../components/ProjectAccordians";
 
 function CohortDetails({ name }) {
   return (
     <>
       <Header title="Cohort Name" subTitle={name} />
-      <Box
-        display="grid"
-        gridTemplateColumns="repeat(12,1fr)"
-        gridAutoRows="8rem"
-        gap="20px"
-      >
-        <Box
-          gridColumn="span 12"
-          gridRow="span 2"
-          border="1px solid red"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          Covar
-        </Box>
 
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          border="1px solid red"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          Person Card
-        </Box>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          {/* First Row */}
+          <Grid item xs={12}>
+            <Paper style={{ height: "100%", padding: 20 }}>
+              <BasicTabs />
+            </Paper>
+          </Grid>
 
-        <Box
-          gridColumn="span 3"
-          border="1px solid red"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          Total Participants
-        </Box>
-        <Box
-          gridColumn="span 5"
-          gridRow="span 2"
-          border="1px solid red"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          Projects
-        </Box>
-        <Box
-          gridColumn="span 3"
-          border="1px solid red"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          Mean Age
-        </Box>
+          {/* Second Row */}
+          <Grid item xs={12} md={4}>
+            <PersonCard />
+          </Grid>
+
+          {/* Nested Grid  */}
+          <Grid item xs={12} md={4}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <InfoCard title="Total Participants" value={217} />
+              </Grid>
+              <Grid item xs={12}>
+                <InfoCard title="Mean Age" value={67.6} />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Paper style={{ height: "100%", padding: 20 }}>
+              <ProjectAccordians />
+            </Paper>
+          </Grid>
+        </Grid>
       </Box>
     </>
   );

@@ -92,6 +92,8 @@ function getCohortData() {
 
 function Cohorts() {
   const [data, setData] = useState([]);
+  const [cohort, setCohort] = useState("");
+
   useEffect(() => {
     const getData = async () => {
       const result = await getCohortData();
@@ -100,7 +102,7 @@ function Cohorts() {
     };
 
     getData();
-  }, []);
+  }, [data]);
 
   return (
     <Box mx={2}>
@@ -120,12 +122,15 @@ function Cohorts() {
             </Box>
           </CardContent>
         </Card>
-      ) : (
+      ) : !cohort.length ? (
         <EnhancedTable
           rows={data}
           headCells={headCells}
+          setCohort={setCohort}
           tableTitle="List of Cohorts"
         />
+      ) : (
+        <CohortDetails name={cohort} />
       )}
     </Box>
   );

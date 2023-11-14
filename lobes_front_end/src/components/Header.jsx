@@ -9,11 +9,11 @@ function Header({ title, subTitle }) {
   return (
     <Box
       width="100%"
-      my="10px"
+      my="5px"
       display="flex"
       justifyContent="space-around"
       flexDirection="column"
-      gap="10px"
+      gap="5px"
     >
       <Typography variant="h4" color={colors.blues[500]}>
         {title}

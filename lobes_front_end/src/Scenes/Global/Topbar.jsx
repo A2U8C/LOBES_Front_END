@@ -23,7 +23,7 @@ function Topbar() {
   };
 
   return (
-    <Box display="flex" justifyContent="space-between" p={2}>
+    <Box display="flex" justifyContent="space-between" px={2} my={2}>
       {/* Working Group Select Dropdown  */}
       <Box sx={{ minWidth: "50%" }}>
         <FormControl fullWidth>
