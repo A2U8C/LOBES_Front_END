@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  transition: padding-left 0.3s;
 }
 
 .App-logo {
@@ -26,6 +27,24 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.content {
+  margin-bottom: 20px;
+}
+
+.expanded {
+  .content {
+    padding-left: 260px;
+    transition: padding-left 0.3s;
+  }
+}
+
+.collapsed {
+  .content {
+    padding-left: 90px; /* Adjust the padding when sidebar is collapsed */
+    transition: padding-left 0.3s;
+  }
 }
 
 @keyframes App-logo-spin {

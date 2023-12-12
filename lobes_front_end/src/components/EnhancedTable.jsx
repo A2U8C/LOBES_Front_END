@@ -12,9 +12,11 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import { useTheme } from "@mui/material";
+import { TextField, useTheme } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
 import { Divider } from "@mui/material";
 import { tokens } from "../theme";
+import SearchIcon from "@mui/icons-material/Search";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -88,7 +90,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { title } = props;
+  const { title, handleSearch } = props;
 
   return (
     <Toolbar
@@ -108,13 +110,20 @@ function EnhancedTableToolbar(props) {
         <Typography variant="h3" sx={{ flex: "1 1 100%", fontWeight: "bold" }}>
           {title}
         </Typography>
-        <Box
-          border="1px solid black"
-          borderRadius="10px"
-          padding="5px"
-          sx={{ flex: "1 1 100%" }}
-        >
-          Search...
+        {/* Search Bar  */}
+        <Box>
+          <TextField
+            id="search_bar"
+            placeholder="Search..."
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            onChange={handleSearch}
+          />
         </Box>
       </Box>
     </Toolbar>
@@ -126,16 +135,23 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable(props) {
-  const { tableTitle, rows, headCells } = props;
+  const { tableTitle, rows, headCells, setCohort } = props;
 
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState();
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+  const [searchTerm, setSearchTerm] = React.useState("");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  // console.log(rows);
+
+  const handleSearch = (event) => {
+    const val = event.target.value.trim();
+    setSearchTerm(val);
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -161,23 +177,27 @@ export default function EnhancedTable(props) {
     setPage(0);
   };
 
+  const filteredData = rows.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   const visibleRows = React.useMemo(
     () =>
-      stableSort(rows, getComparator(order, orderBy)).slice(
+      stableSort(filteredData, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
-    [order, orderBy, page, rowsPerPage]
+    [order, orderBy, page, rowsPerPage, filteredData]
   );
 
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2, px: 2 }}>
-        <EnhancedTableToolbar title={tableTitle} />
+        <EnhancedTableToolbar title={tableTitle} handleSearch={handleSearch} />
         <Divider
           sx={{
             borderBottomWidth: 2,
@@ -207,7 +227,14 @@ export default function EnhancedTable(props) {
                     key={row.name}
                     sx={{ cursor: "pointer" }}
                   >
-                    <TableCell component="th" id={labelId} scope="row">
+                    <TableCell
+                      component="th"
+                      id={labelId}
+                      scope="row"
+                      onClick={() => {
+                        setCohort(row.name);
+                      }}
+                    >
                       <Typography variant="h5">{row.name}</Typography>
                     </TableCell>
                   </TableRow>
@@ -228,7 +255,7 @@ export default function EnhancedTable(props) {
         <TablePagination
           rowsPerPageOptions={[5, 10, 15]}
           component="div"
-          count={rows.length}
+          count={filteredData.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

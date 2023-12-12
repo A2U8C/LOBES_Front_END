@@ -18,9 +18,10 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+backend-env/
 
 # Constants
-*constants.py 
+constants.py 
 
 # Ignore for Pycarm
 *.idea/
@@ -42,3 +43,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 node_modules
+
+Dockerfile
+.*

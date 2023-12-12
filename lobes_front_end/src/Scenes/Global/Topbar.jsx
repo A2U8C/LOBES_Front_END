@@ -23,7 +23,7 @@ function Topbar() {
   };
 
   return (
-    <Box display="flex" justifyContent="space-between" p={2}>
+    <Box display="flex" justifyContent="space-between" px={2} my={2}>
       {/* Working Group Select Dropdown  */}
       <Box sx={{ minWidth: "50%" }}>
         <FormControl fullWidth>
@@ -35,12 +35,12 @@ function Topbar() {
             label="Working Group"
             onChange={handleChange}
           >
-            <MenuItem value="PD WG">Parkinson Disease Working Group</MenuItem>
+            <MenuItem value="PD WG">Parkinson's Disease Working Group</MenuItem>
           </Select>
         </FormControl>
       </Box>
       {/* Icons  */}
-      <Box display="flex" justifyContent="space-evenly">
+      {/* <Box display="flex" justifyContent="space-evenly">
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlined />
@@ -48,7 +48,7 @@ function Topbar() {
             <LightModeOutlined />
           )}
         </IconButton>
-      </Box>
+      </Box> */}
     </Box>
   );
 }
