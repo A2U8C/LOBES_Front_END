@@ -3,7 +3,7 @@ import React from "react";
 
 function InfoCard({ title, value }) {
   return (
-    <Card>
+    <Card sx={{ height: "100%" }}>
       <CardContent
         sx={{
           display: "flex",
@@ -18,9 +18,18 @@ function InfoCard({ title, value }) {
         >
           {title}
         </Typography>
-        <Typography sx={{ fontSize: 40, color: "#332A7C", fontWeight: "bold" }}>
-          {value}
-        </Typography>
+
+        {value ? (
+          <Typography
+            sx={{ fontSize: 40, color: "#332A7C", fontWeight: "bold" }}
+          >
+            {value}
+          </Typography>
+        ) : (
+          <Typography sx={{ fontSize: 20, color: "#a9a9a9" }}>
+            No data available
+          </Typography>
+        )}
       </CardContent>
     </Card>
   );

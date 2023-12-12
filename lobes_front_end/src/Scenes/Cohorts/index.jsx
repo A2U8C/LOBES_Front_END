@@ -3,74 +3,6 @@ import React, { useEffect, useState } from "react";
 import CohortDetails from "./CohortDetails";
 import EnhancedTable from "../../components/EnhancedTable";
 
-const mockData = [
-  {
-    name: "Cohort 1",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-  {
-    name: "Cohort 2",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-  {
-    name: "Cohort 3",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-  {
-    name: "Cohort 4",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-  {
-    name: "Cohort 5",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-  {
-    name: "Cohort 6",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-  {
-    name: "Cohort 7",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-  {
-    name: "Cohort 8",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-  {
-    name: "Cohort 9",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-  {
-    name: "Cohort 10",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-  {
-    name: "Cohort 11",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-  {
-    name: "Cohort 12",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-  {
-    name: "Cohort 13",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam quisquam cum autem. Dolorem velit cumque fugiat! Ab temporibus odit ipsa maxime possimus, minus maiores rem quam illo molestias aspernatur quibusdam.",
-  },
-];
-
 const headCells = [
   {
     id: "name",
@@ -80,14 +12,33 @@ const headCells = [
   },
 ];
 
-function getCohortData() {
-  return new Promise(function (resolve, reject) {
-    // some async operation here
-    setTimeout(function () {
-      // resolve the promise with some value
-      resolve(mockData);
-    }, 3000);
+async function getAPIData() {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    name: "PD WG",
+    endpoint_id: "https://endpoint.linkedearth.isi.edu/enigma_pd/query",
+    projType: "WorkingGroup (E)",
   });
+
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  var url = "https://enigma-flask-api-mdm4nsgoyq-wl.a.run.app/";
+
+  const data = await fetch(url + "cohorts", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => console.log("error", error));
+
+  return data;
 }
 
 function Cohorts() {
@@ -96,13 +47,23 @@ function Cohorts() {
 
   useEffect(() => {
     const getData = async () => {
-      const result = await getCohortData();
-      setData(result);
+      const result = await getAPIData();
+      const tableData = [];
+      result.projects.map((val) =>
+        val.name !== "Not Listed In Project"
+          ? val.cohorts.map((cohort) => {
+              if (!tableData.some((e) => e.name === cohort)) {
+                tableData.push({ name: cohort });
+              }
+            })
+          : {}
+      );
+      setData(tableData);
       return result;
     };
 
     getData();
-  }, [data]);
+  }, []);
 
   return (
     <Box mx={2}>
@@ -130,7 +91,7 @@ function Cohorts() {
           tableTitle="List of Cohorts"
         />
       ) : (
-        <CohortDetails name={cohort} />
+        <CohortDetails name={cohort} setCohort={setCohort} />
       )}
     </Box>
   );

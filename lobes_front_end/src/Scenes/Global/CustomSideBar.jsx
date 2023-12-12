@@ -6,7 +6,15 @@ import { Link } from "react-router-dom";
 import Logo from "../../Assets/Logo.svg";
 
 import { Box, Typography, Divider, useTheme } from "@mui/material";
-import { Home, MenuOutlined, Groups, Close } from "@mui/icons-material";
+import {
+  Home,
+  MenuOutlined,
+  Groups,
+  Close,
+  Create,
+  Summarize,
+  CoPresent,
+} from "@mui/icons-material";
 import { tokens } from "../../theme";
 
 const Item = ({ title, icon, to, isSelected, setIsSelected }) => {
@@ -30,12 +38,11 @@ const Item = ({ title, icon, to, isSelected, setIsSelected }) => {
   );
 };
 
-function CustomSideBar() {
+function CustomSideBar({ isCollapsed, setIsCollapsed }) {
   const theme = useTheme();
   const [isSelected, setIsSelected] = useState("Home");
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const colors = tokens(theme.palette.mode);
 
+  const colors = tokens(theme.palette.mode);
   // // Responsive Side Bar behaviour
   const [width, setWidth] = useState();
   function getSize() {
@@ -53,7 +60,7 @@ function CustomSideBar() {
     return () => {
       window.removeEventListener("resize", getSize);
     };
-  }, [width]);
+  }, [width, setIsCollapsed]);
 
   return (
     <Box>
@@ -61,7 +68,10 @@ function CustomSideBar() {
         collapsed={isCollapsed}
         backgroundColor={colors.blues[600]}
         rootStyles={{
-          height: "100%",
+          height: "100vh",
+          position: "fixed",
+          left: 0,
+          top: 0,
         }}
         width="250px"
       >
@@ -145,6 +155,13 @@ function CustomSideBar() {
               isSelected={isSelected}
               setIsSelected={setIsSelected}
             />
+            <Item
+              title="Projects"
+              icon={<CoPresent />}
+              to="/projects"
+              isSelected={isSelected}
+              setIsSelected={setIsSelected}
+            />
 
             <Item
               title="Cohorts"
@@ -153,6 +170,22 @@ function CustomSideBar() {
               isSelected={isSelected}
               setIsSelected={setIsSelected}
             />
+
+            <Item
+              title="Covariates"
+              icon={<Create />}
+              to="/covar"
+              isSelected={isSelected}
+              setIsSelected={setIsSelected}
+            />
+
+            {/* <Item
+              title="Summary"
+              icon={<Summarize />}
+              to="/summary"
+              isSelected={isSelected}
+              setIsSelected={setIsSelected}
+            /> */}
           </Box>
         </Menu>
       </Sidebar>

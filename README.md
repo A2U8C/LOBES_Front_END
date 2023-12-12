@@ -1,3 +1,0 @@
-# LOBES_Web_Application
-lobes_front_end
-lobes_back_end

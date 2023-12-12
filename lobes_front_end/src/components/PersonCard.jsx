@@ -8,21 +8,58 @@ import SchoolIcon from "@mui/icons-material/School";
 import PersonIcon from "@mui/icons-material/Person";
 import { Box, Tooltip, Typography } from "@mui/material";
 
-const PersonsCard = ({ title, name, email, education }) => {
+const PersonsCard = ({ title, name = "", email = "", education = "" }) => {
+  var names = [];
+  if (Array.isArray(name)) {
+    for (let index = 0; index < name.length; index++) {
+      names.push(name[index]);
+    }
+  } else {
+    names.push(name);
+  }
   return (
     <Card style={{ height: "100%", position: "relative" }}>
       <CardHeader
-        titleTypographyProps={{ variant: "h5" }}
-        title="Principal Investigator"
+        titleTypographyProps={{ variant: "h4" }}
+        title={title}
         sx={{
           color: "#332A7C",
         }}
       />
-      <CardContent>
-        <Typography variant="h1" color="#332A7C">
-          John <span style={{ color: "#FFA000" }}>Doe</span>
-        </Typography>
-      </CardContent>
+      {name ? (
+        <CardContent
+          sx={{
+            pb: 10,
+            display: "flex",
+            alignItems: "start",
+            justifyContent: "space-evenly",
+            flexDirection: "column",
+            gap: 4,
+          }}
+        >
+          {names.map((val, index) => (
+            <Typography variant="h1" color="#332A7C" key={index}>
+              {val.split(" ")[0]}
+              <br />
+              <span style={{ color: "#FFA000" }}>
+                {val.split(" ").slice(1).join(" ")}
+              </span>
+            </Typography>
+          ))}
+        </CardContent>
+      ) : (
+        <CardContent>
+          <Typography
+            sx={{
+              fontSize: 40,
+              color: "#a9a9a9",
+              pb: 10,
+            }}
+          >
+            Unavailable
+          </Typography>
+        </CardContent>
+      )}
 
       <Box
         sx={{
@@ -38,23 +75,38 @@ const PersonsCard = ({ title, name, email, education }) => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "8px",
+            padding: 8,
             left: 0,
             bottom: 0,
             position: "relative",
           }}
         >
-          <Box>
-            <Tooltip title="PhD">
-              <IconButton aria-label="education">
-                <SchoolIcon style={{ color: "white" }} />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="example@usc.edu">
-              <IconButton aria-label="email">
-                <EmailIcon style={{ color: "white" }} />
-              </IconButton>
-            </Tooltip>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+          >
+            {education ? (
+              <Tooltip title={education}>
+                <IconButton aria-label="education">
+                  <SchoolIcon style={{ color: "white" }} />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Box height={30} />
+            )}
+
+            {email ? (
+              <Tooltip title={email}>
+                <IconButton aria-label="email">
+                  <EmailIcon style={{ color: "white" }} />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Box height={30} />
+            )}
           </Box>
           <Box
             style={{
