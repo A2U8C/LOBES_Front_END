@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/ENIGMA-git/enigma_frontend/static/css/main.4b60b177.css",
+    "main.js": "/ENIGMA-git/enigma_frontend/static/js/main.8cc80a85.js",
+    "static/js/787.e40a483b.chunk.js": "/ENIGMA-git/enigma_frontend/static/js/787.e40a483b.chunk.js",
+    "static/media/Logo.svg": "/ENIGMA-git/enigma_frontend/static/media/Logo.1c4f8ef4e534b90963e857e99ec3e126.svg",
+    "index.html": "/ENIGMA-git/enigma_frontend/index.html",
+    "main.4b60b177.css.map": "/ENIGMA-git/enigma_frontend/static/css/main.4b60b177.css.map",
+    "main.8cc80a85.js.map": "/ENIGMA-git/enigma_frontend/static/js/main.8cc80a85.js.map",
+    "787.e40a483b.chunk.js.map": "/ENIGMA-git/enigma_frontend/static/js/787.e40a483b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4b60b177.css",
+    "static/js/main.8cc80a85.js"
+  ]
+}
